@@ -157,6 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Jugador.h" />
     <ClInclude Include="Moneda.h" />
     <ClInclude Include="pch.h" />

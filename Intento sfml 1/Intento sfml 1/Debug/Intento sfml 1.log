@@ -1,4 +1,4 @@
 ﻿  pch.cpp
   Intento sfml 1.cpp
-e:\mi_github\mis_repositorios\intento sfml 1\intento sfml 1\jugador.h(22): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-  Intento sfml 1.vcxproj -> E:\Mi_Github\Mis_Repositorios\Intento sfml 1\Debug\Intento sfml 1.exe
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\jugador.h(22): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  Intento sfml 1.vcxproj -> E:\Mi_Github\TesteaAplicaccion\Intento sfml 1\Debug\Intento sfml 1.exe
