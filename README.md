@@ -1,2 +1,2 @@
 # TestAplicattion
-static/* linguist-vendored
+.gitattributes
