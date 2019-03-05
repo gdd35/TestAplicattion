@@ -29,10 +29,13 @@ int main()
 	Background background("Sprites/background.png",ventana);
 	Score score;
 
+	Clock clock;
+	Time time;
+
 	Event event;
 
 #pragma region Declaraciones
-	ventana.setFramerateLimit(15);
+	ventana.setFramerateLimit(20);
 	ventana.setKeyRepeatEnabled(false);
 #pragma endregion
 
@@ -51,8 +54,12 @@ int main()
 			}
 		}
 
+		time = clock.getElapsedTime();
+
 		// Movimiento del jugador
-		player.moverJugador(); 
+		player.moverJugador(time,clock); 
+
+		clock.restart().asMilliseconds();
 
 		// Animacion de la moneda
 		moneda.animacionMoneda();	
@@ -65,7 +72,6 @@ int main()
 
 #pragma endregion
 		
-
 		background.dibujarBackground(ventana);
 
 		score.mostrarPuntaje(ventana,player);
@@ -84,10 +90,10 @@ int main()
 		
 		ventana.display();
 		if (ventana.hasFocus()) {
-			cout << "Jugando" << endl;
+			//cout << "Jugando" << endl;
 		}
 		else {
-			cout << "No esta jugando" << endl;
+			//cout << "No esta jugando" << endl;
 		}
 	}
 	return 0;

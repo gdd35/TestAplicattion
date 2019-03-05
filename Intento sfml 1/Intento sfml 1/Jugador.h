@@ -30,6 +30,7 @@ public:
 		pTexture.setSmooth(true);
 		pSprite.setScale(0.1, 0.1);
 		pSprite.setTexture(pTexture);	
+
 		// Posicion inicial dele sprite
 		pSprite.setTextureRect(IntRect(1000,0,1000,1000)); 				
 	}
@@ -44,32 +45,40 @@ public:
 	// Igualmente si no quedo claro asi despues les explico mejor
 #pragma endregion
 
-	void moverJugador() {
+	void moverJugador(Time time, Clock clock) {
+		_time = time;
+		_clock = clock;
+		_time = clock.getElapsedTime();
 
 		if (Keyboard::isKeyPressed(Keyboard::Down))
 		{
-			pSprite.move(0, movPlayer);
+			pSprite.move(0, movPlayer * _time.asMilliseconds() );
 			pSprite.setTextureRect(IntRect(1000 * contadorMovimiento, 0, 1000, 1000)); 
+			
 		}
 		else if (Keyboard::isKeyPressed(Keyboard::Up))
 		{
-			pSprite.move(0, -movPlayer);
+			pSprite.move(0, -movPlayer * _time.asMilliseconds() );
 			pSprite.setTextureRect(IntRect(1000 * contadorMovimiento, 1000, 1000, 1000));
 		}
 		else if (Keyboard::isKeyPressed(Keyboard::Right))
 		{
-			pSprite.move(movPlayer, 0);
+			pSprite.move(movPlayer *_time.asMilliseconds() , 0);
 			pSprite.setTextureRect(IntRect(1000 * contadorMovimiento, 2000, 1000, 1000));
+			
 		}
 		else if (Keyboard::isKeyPressed(Keyboard::Left)) {
-			pSprite.move(-movPlayer, 0);
+			pSprite.move(-movPlayer * _time.asMilliseconds() , 0);
 			pSprite.setTextureRect(IntRect(1000 * contadorMovimiento, 3000, 1000, 1000));
+			
+			
 		}
 		contadorMovimiento++;
 
 		if (contadorMovimiento == 3) {
 			contadorMovimiento = 0;
-		}
+		}	
+		_clock.restart().asMilliseconds();	
 	}
 
 	void actualizaJugador() {
@@ -98,12 +107,12 @@ public:
 private: 
 	Texture pTexture;
 	Sprite	pSprite;
+	Time _time;
+	Clock _clock;
 
 	int vida;
 	int puntos;
-
-	float movimientoJugador = 10;
 	int contadorMovimiento = 0;
-	float movPlayer = 4;
+	float movPlayer = 0.099;
 
 };

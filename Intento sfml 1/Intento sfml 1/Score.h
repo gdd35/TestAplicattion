@@ -10,8 +10,7 @@
 
 class Score {
 
-	public:
-		Score() {}
+	public:	
 
 		void mostrarPuntaje(RenderWindow &window ,Jugador &jugador) {
 			if (!font.loadFromFile("Fonts/Gobold Uplow.ttf")) {
