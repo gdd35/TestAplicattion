@@ -1,30 +1,33 @@
-// Intento sfml 1.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
 #pragma region Headers
+
 #include "pch.h"
 #include "Jugador.h"
 #include "Moneda.h"
 #include "Background.h"
+#include "Score.h"
+
 #pragma endregion
+
 #pragma region Bibliotecas
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
+
 #pragma endregion
 
 using namespace std;
 using namespace sf;
 
-Vector2i SizeStartWindow(800,600);
+Vector2f SizeStartWindow(800,600);
 
 int main()
 {
-
-	
-	RenderWindow ventana(VideoMode(SizeStartWindow.x, SizeStartWindow.y), "Al fin me anduvo esta mierda concha la lora");
+	RenderWindow ventana(VideoMode(SizeStartWindow.x, SizeStartWindow.y), "Al fin me anduvo esta mierda concha la lora", sf::Style::Titlebar | sf::Style::Close);
 
 	Jugador player("Sprites/movimiento_player.png");
-	Moneda moneda("Sprites/moneda.png");
+	Moneda moneda("Sprites/moneda.png",ventana);
 	Background background("Sprites/background.png",ventana);
+	Score score;
 
 	Event event;
 
@@ -32,11 +35,6 @@ int main()
 	ventana.setFramerateLimit(15);
 	ventana.setKeyRepeatEnabled(false);
 #pragma endregion
-
-
-	
-
-
 
 	while (ventana.isOpen()) {
 
@@ -53,9 +51,11 @@ int main()
 			}
 		}
 
-		player.actualizarJugador(); // Movimiento del jugador, esto despues hay que ponerlo mas prolijo
+		// Movimiento del jugador
+		player.moverJugador(); 
 
-		moneda.actualizarMoneda();	// Animacion de la moneda
+		// Animacion de la moneda
+		moneda.animacionMoneda();	
 
 		ventana.clear();
 
@@ -64,14 +64,31 @@ int main()
 		//Hay que tener cuidado a la hora de poner los sprites, dado que estos se superponen, creo que el orden correcto seria background-> plataformas -> jugador -> enemigo -> moneda
 
 #pragma endregion
+		
 
 		background.dibujarBackground(ventana);
 
-		player.dibujarJugador(ventana);
+		score.mostrarPuntaje(ventana,player);
 
 		moneda.dibujarMoneda(ventana);
 
-		ventana.display();
+		player.dibujarJugador(ventana);
 
+		player.actualizaJugador();
+
+		moneda.actualizarMoneda();
+
+		if (player.Collision(moneda, ventana)) {
+			moneda.mSprite.setPosition(rand() % ventana.getSize().x, rand() % ventana.getSize().y);
+		}
+		
+		ventana.display();
+		if (ventana.hasFocus()) {
+			cout << "Jugando" << endl;
+		}
+		else {
+			cout << "No esta jugando" << endl;
+		}
 	}
+	return 0;
 }

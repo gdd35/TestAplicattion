@@ -9,8 +9,8 @@ using namespace std;
 class Background {
 
 public:
-	Background() {}
-	Background(string imagen, RenderWindow &window) {
+		Background() {}
+		Background(string imagen, RenderWindow &window) {
 
 		bImage.create(window.getSize().x, window.getSize().y); 
 
@@ -34,7 +34,7 @@ public:
 
 
 	private:
-		Texture bTexture;
-		Sprite bSprite;
-		Image bImage;
+			Texture bTexture;
+			Sprite bSprite;
+			Image bImage;
 };
