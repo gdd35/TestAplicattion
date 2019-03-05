@@ -1,0 +1,2 @@
+# TestAplicattion
+static/* linguist-vendored
