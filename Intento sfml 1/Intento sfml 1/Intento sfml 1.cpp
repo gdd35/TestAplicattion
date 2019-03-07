@@ -11,8 +11,6 @@
 #pragma region Libraries
 
 #include <iostream>   
-#include <stdlib.h>
-#include <time.h>
 #include <SFML/Graphics.hpp>
 
 #pragma endregion
@@ -20,15 +18,15 @@
 using namespace std;
 using namespace sf;
 
-Vector2f SizeStartWindow(800,600);
+Vector2f SizeStartWindow(800, 600);
 
 int main()
 {
 	RenderWindow window(VideoMode(SizeStartWindow.x, SizeStartWindow.y), "Al fin me anduvo esta mierda concha la lora", sf::Style::Titlebar | sf::Style::Close);
 
 	Player player("Sprites/movimiento_player.png");
-	Coin coin("Sprites/moneda.png",window);
-	Background background("Sprites/background.png",window);
+	Coin coin("Sprites/moneda.png", window);
+	Background background("Sprites/background.png", window);
 	Score score;
 
 	Clock clock;
@@ -61,7 +59,7 @@ int main()
 		time = clock.getElapsedTime();
 
 		// Move of the Player
-		player.movePlayer(time,clock); 
+		player.movePlayer(time, clock);
 
 		clock.restart().asMilliseconds();
 
@@ -74,11 +72,12 @@ int main()
 
 		/* You have to be careful when putting the sprites, since they overlap, I think the correct order would be:
 		   background-> platforms -> player -> enemy -> coin */
+
 #pragma endregion
-		
+
 		background.drawBackground(window);
 
-		score.showScore(window,player);
+		score.showScore(window, player);
 
 		coin.drawCoin(window);
 
@@ -88,15 +87,13 @@ int main()
 
 		player.updatePlayer();
 
-		coin.updateCoin();
+		coin.getValuesCoin();
 
 		if (player.Collision(coin)) {
-			
-			//coin.coinSprite.setPosition(rand() % window.getSize().x, rand() % window.getSize().y);
-			//srand(time(NULL));
-			cout << rand() % window.getSize().x << endl;
+
+			coin.changePosition(window);
 		}
-		
+
 		window.display();
 		if (window.hasFocus()) {
 			//cout << "Playing..." << endl;
