@@ -5,24 +5,24 @@
 #include <string.h>
 #include <sstream>
 
-#include "Jugador.h"
+#include "Player.h"
 #include <SFML/Graphics.hpp>
 
 class Score {
 
 	public:	
 
-		void mostrarPuntaje(RenderWindow &window ,Jugador &jugador) {
+		void showScore(RenderWindow &window ,Player &player) {
 			if (!font.loadFromFile("Fonts/Gobold Uplow.ttf")) {
 				cout << "ERROR" << endl;
 			}
-			puntaje.setFont(font);
-			puntaje.setPosition(window.getSize().x / 2, 0);
-			puntaje.setString(to_string(jugador._puntos));
-			window.draw(puntaje);
+			score.setFont(font);
+			score.setPosition(window.getSize().x / 2, 0);
+			score.setString(to_string(player._score));
+			window.draw(score);
 		}
 
 	private:
-			Text puntaje;
+			Text score;
 			Font font;
 };

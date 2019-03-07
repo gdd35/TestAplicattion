@@ -1,14 +1,14 @@
 #pragma region Headers
 
 #include "pch.h"
-#include "Jugador.h"
-#include "Moneda.h"
+#include "Player.h"
+#include "Coin.h"
 #include "Background.h"
 #include "Score.h"
 
 #pragma endregion
 
-#pragma region Bibliotecas
+#pragma region Libraries
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -22,11 +22,11 @@ Vector2f SizeStartWindow(800,600);
 
 int main()
 {
-	RenderWindow ventana(VideoMode(SizeStartWindow.x, SizeStartWindow.y), "Al fin me anduvo esta mierda concha la lora", sf::Style::Titlebar | sf::Style::Close);
+	RenderWindow window(VideoMode(SizeStartWindow.x, SizeStartWindow.y), "Al fin me anduvo esta mierda concha la lora", sf::Style::Titlebar | sf::Style::Close);
 
-	Jugador player("Sprites/movimiento_player.png");
-	Moneda moneda("Sprites/moneda.png",ventana);
-	Background background("Sprites/background.png",ventana);
+	Player player("Sprites/movimiento_player.png");
+	Coin coin("Sprites/moneda.png",window);
+	Background background("Sprites/background.png",window);
 	Score score;
 
 	Clock clock;
@@ -34,21 +34,23 @@ int main()
 
 	Event event;
 
-#pragma region Declaraciones
-	ventana.setFramerateLimit(20);
-	ventana.setKeyRepeatEnabled(false);
+#pragma region Declarations
+
+	window.setFramerateLimit(20);
+	window.setKeyRepeatEnabled(false);
+
 #pragma endregion
 
-	while (ventana.isOpen()) {
+	while (window.isOpen()) {
 
-		while (ventana.pollEvent(event)) {
+		while (window.pollEvent(event)) {
 			switch (event.type) {
 			case Event::Closed:
-				ventana.close();
+				window.close();
 				break;
 			case Event::KeyPressed:
 				if (event.key.code == Keyboard::Escape) {
-					ventana.close();
+					window.close();
 					return EXIT_SUCCESS;
 				}
 			}
@@ -56,44 +58,46 @@ int main()
 
 		time = clock.getElapsedTime();
 
-		// Movimiento del jugador
-		player.moverJugador(time,clock); 
+		// Move of the Player
+		player.movePlayer(time,clock); 
 
 		clock.restart().asMilliseconds();
 
-		// Animacion de la moneda
-		moneda.animacionMoneda();	
+		// Animation coin
+		coin.animationCoin();
 
-		ventana.clear();
+		window.clear();
 
-#pragma region Orden al dibujar sprites
+#pragma region Order to draw the sprite
 
-		//Hay que tener cuidado a la hora de poner los sprites, dado que estos se superponen, creo que el orden correcto seria background-> plataformas -> jugador -> enemigo -> moneda
-
+		/* You have to be careful when putting the sprites, since they overlap, I think the correct order would be:
+		   background-> platforms -> player -> enemy -> coin */
 #pragma endregion
 		
-		background.dibujarBackground(ventana);
+		background.drawBackground(window);
 
-		score.mostrarPuntaje(ventana,player);
+		score.showScore(window,player);
 
-		moneda.dibujarMoneda(ventana);
+		coin.drawCoin(window);
 
-		player.dibujarJugador(ventana);
+		player.drawPlayer(window);
 
-		player.actualizaJugador();
+		coin.animationCoin();
 
-		moneda.actualizarMoneda();
+		player.updatePlayer();
 
-		if (player.Collision(moneda, ventana)) {
-			moneda.mSprite.setPosition(rand() % ventana.getSize().x, rand() % ventana.getSize().y);
+		coin.updateCoin();
+
+		if (player.Collision(coin, window)) {
+			coin.coinSprite.setPosition(rand() % window.getSize().x, rand() % window.getSize().y);
 		}
 		
-		ventana.display();
-		if (ventana.hasFocus()) {
-			//cout << "Jugando" << endl;
+		window.display();
+		if (window.hasFocus()) {
+			//cout << "Playing..." << endl;
 		}
 		else {
-			//cout << "No esta jugando" << endl;
+			//cout << "Not Playing..." << endl;
 		}
 	}
 	return 0;

@@ -10,31 +10,31 @@ class Background {
 
 public:
 		Background() {}
-		Background(string imagen, RenderWindow &window) {
+		Background(string background, RenderWindow &window) {
 
-		bImage.create(window.getSize().x, window.getSize().y); 
+		backgroundImage.create(window.getSize().x, window.getSize().y); 
 
-#pragma region Entender tamaño ventana
+#pragma region Understand Window Size
 		// Creo una imagen, con este tamaño que seria el de la ventana, al poner directamente que obtenga el valor de la ventana que le pase por
 		// parametro, si vos agrandas esa ventana, la imagen iria acorde a eso
 #pragma endregion
 
-		bImage.loadFromFile(imagen); // Luego, cargo esa imagen desde un archivo que es el que paso por parametro
+		backgroundImage.loadFromFile(background); // Luego, cargo esa imagen desde un archivo que es el que paso por parametro
 
-		if (!bTexture.loadFromImage(bImage)) // Se le carga a la textura
+		if (!backgroundTexture.loadFromImage(backgroundImage)) // Set texture
 		{
-			cerr << "Error \n";
+			cerr << "ERROR" << endl;
 		}
-				bTexture.setSmooth(true);
-				bSprite.setTexture(bTexture); // Luego al sprite, asi puedo dibujarlo
+				backgroundTexture.setSmooth(true);
+				backgroundSprite.setTexture(backgroundTexture); // Set sprite to draw
 			}
-	void dibujarBackground(RenderWindow &window) {
-		window.draw(bSprite);
+	void drawBackground(RenderWindow &window) {
+		window.draw(backgroundSprite);
 	}
 
 
 	private:
-			Texture bTexture;
-			Sprite bSprite;
-			Image bImage;
+			Texture backgroundTexture;
+			Sprite backgroundSprite;
+			Image backgroundImage;
 };

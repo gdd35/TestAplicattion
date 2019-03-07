@@ -158,8 +158,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Background.h" />
-    <ClInclude Include="Jugador.h" />
-    <ClInclude Include="Moneda.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Coin.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Score.h" />
   </ItemGroup>
