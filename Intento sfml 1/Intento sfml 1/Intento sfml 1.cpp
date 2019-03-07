@@ -10,7 +10,9 @@
 
 #pragma region Libraries
 
-#include <iostream>
+#include <iostream>   
+#include <stdlib.h>
+#include <time.h>
 #include <SFML/Graphics.hpp>
 
 #pragma endregion
@@ -88,8 +90,11 @@ int main()
 
 		coin.updateCoin();
 
-		if (player.Collision(coin, window)) {
-			coin.coinSprite.setPosition(rand() % window.getSize().x, rand() % window.getSize().y);
+		if (player.Collision(coin)) {
+			
+			//coin.coinSprite.setPosition(rand() % window.getSize().x, rand() % window.getSize().y);
+			//srand(time(NULL));
+			cout << rand() % window.getSize().x << endl;
 		}
 		
 		window.display();

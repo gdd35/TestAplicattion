@@ -22,7 +22,7 @@ class Coin {
 				coinTexture.setSmooth(true);
 				coinSprite.setTexture(coinTexture);
 				coinSprite.setTextureRect(IntRect(0, 0, 100, 110));
-
+				srand(time(NULL));
 				position.y = rand() % window.getSize().x;
 				position.y = rand() % window.getSize().y;
 				coinSprite.setPosition(position.x, position.y);

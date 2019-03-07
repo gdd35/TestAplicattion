@@ -92,7 +92,7 @@ public:
 			// pSprite.getPosition().y + (pSprite.getGlobalBounds().height*0.25) esto me da la parte de arriba del personaje (a partir del casco)
 			// pSprite.getPosition().y + (pSprite.getGlobalBounds().height*0.90) esto me da la parte de abajo del personaje
 
-	bool Collision(Coin coin , RenderWindow &window) {
+	bool Collision(Coin coin) {
 
 		if (right < coin.left  || left > coin.right ||
 			up > coin.down || down < coin.up ) {
