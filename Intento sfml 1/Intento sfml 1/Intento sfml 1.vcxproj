@@ -158,6 +158,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Background.h" />
+    <ClInclude Include="EnemyBat.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="pch.h" />

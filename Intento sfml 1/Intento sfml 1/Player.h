@@ -6,6 +6,7 @@
 #include <sstream>
 
 #include "Coin.h"
+#include "EnemyBat.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -16,10 +17,10 @@ class Player {
 public:
 
 	float down, left, right, up;
-	int _score;
+	int _score, _life;
 	Player() {}
 
-	Player(string player)
+	Player(string player, RenderWindow &window)
 	{
 		score = 0;
 		_score = 0;
@@ -30,6 +31,7 @@ public:
 		playerTexture.setSmooth(true);
 		playerSprite.setScale(0.1, 0.1);
 		playerSprite.setTexture(playerTexture);
+		playerSprite.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
 		// Sprite initial position
 		playerSprite.setTextureRect(IntRect(1000, 0, 1000, 1000));
@@ -46,7 +48,7 @@ public:
 
 #pragma endregion
 
-	void movePlayer(Time time, Clock clock) {
+	void move(Time time, Clock clock) {
 		_time = time;
 		_clock = clock;
 		_time = clock.getElapsedTime();
@@ -54,35 +56,35 @@ public:
 		if (Keyboard::isKeyPressed(Keyboard::Down))
 		{
 			playerSprite.move(0, movPlayer * _time.asMilliseconds());
-			playerSprite.setTextureRect(IntRect(1000 * countMov, 0, 1000, 1000));
+			playerSprite.setTextureRect(IntRect(1000 * spriteX, 0, 1000, 1000));
 
 		}
 		else if (Keyboard::isKeyPressed(Keyboard::Up))
 		{
 			playerSprite.move(0, -movPlayer * _time.asMilliseconds());
-			playerSprite.setTextureRect(IntRect(1000 * countMov, 1000, 1000, 1000));
+			playerSprite.setTextureRect(IntRect(1000 * spriteX, 1000, 1000, 1000));
 		}
 		else if (Keyboard::isKeyPressed(Keyboard::Right))
 		{
 			playerSprite.move(movPlayer *_time.asMilliseconds(), 0);
-			playerSprite.setTextureRect(IntRect(1000 * countMov, 2000, 1000, 1000));
+			playerSprite.setTextureRect(IntRect(1000 * spriteX, 2000, 1000, 1000));
 
 		}
 		else if (Keyboard::isKeyPressed(Keyboard::Left)) {
 			playerSprite.move(-movPlayer * _time.asMilliseconds(), 0);
-			playerSprite.setTextureRect(IntRect(1000 * countMov, 3000, 1000, 1000));
+			playerSprite.setTextureRect(IntRect(1000 * spriteX, 3000, 1000, 1000));
 
 
 		}
-		countMov++;
+		spriteX++;
 
-		if (countMov == 3) {
-			countMov = 0;
+		if (spriteX == 3) {
+			spriteX = 0;
 		}
 		_clock.restart().asMilliseconds();
 	}
 
-	void updatePlayer() {
+	void getPlayer() {
 		down = playerSprite.getPosition().y + (playerSprite.getGlobalBounds().height*0.90);
 		left = playerSprite.getPosition().x + (playerSprite.getGlobalBounds().width*0.25);
 		right = playerSprite.getPosition().x + (playerSprite.getGlobalBounds().width *0.75);
@@ -99,7 +101,7 @@ public:
 
 
 
-	bool Collision(Coin coin) {
+	bool CollisionCoin(Coin coin) {
 
 		if (right < coin.left || left > coin.right ||
 			up > coin.down || down < coin.up) {
@@ -111,6 +113,21 @@ public:
 			return true;
 		}
 	}
+
+	bool CollisionBat(Bat enemyBat) {
+		_life = life;
+		if (right < enemyBat.left || left > enemyBat.right ||
+			up > enemyBat.down || down < enemyBat.up) {
+			return false;
+		}
+		else {
+			life--;
+			return true;
+		}
+	}
+	void changePositionAfterCollisionWithEnemy(RenderWindow &window) {
+		playerSprite.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+	}
 private:
 	Texture playerTexture;
 	Sprite	playerSprite;
@@ -119,7 +136,7 @@ private:
 
 	int life;
 	int score;
-	int countMov = 0;
+	int spriteX = 0;
 	float movPlayer = 0.099;
 
 };

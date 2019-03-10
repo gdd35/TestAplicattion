@@ -5,6 +5,7 @@
 #include "Coin.h"
 #include "Background.h"
 #include "Score.h"
+#include "EnemyBat.h"
 
 #pragma endregion
 
@@ -24,10 +25,11 @@ int main()
 {
 	RenderWindow window(VideoMode(SizeStartWindow.x, SizeStartWindow.y), "Al fin me anduvo esta mierda concha la lora", sf::Style::Titlebar | sf::Style::Close);
 
-	Player player("Sprites/movimiento_player.png");
+	Player player("Sprites/movimiento_player.png", window);
 	Coin coin("Sprites/moneda.png", window);
 	Background background("Sprites/background.png", window);
 	Score score;
+	Bat enemyBat("Sprites/Bat_Fly.png");
 
 	Clock clock;
 	Time time;
@@ -36,7 +38,7 @@ int main()
 
 #pragma region Declarations
 
-	window.setFramerateLimit(20);
+	window.setFramerateLimit(15);
 	window.setKeyRepeatEnabled(false);
 
 #pragma endregion
@@ -55,52 +57,64 @@ int main()
 				}
 			}
 		}
+		while (player._life != 0) {
+			time = clock.getElapsedTime();
 
-		time = clock.getElapsedTime();
+			// Move of the Player
+			player.move(time, clock);
 
-		// Move of the Player
-		player.movePlayer(time, clock);
+			enemyBat.move(window, time, clock);
 
-		clock.restart().asMilliseconds();
+			clock.restart().asMilliseconds();
 
-		// Animation coin
-		coin.animationCoin();
+			// Animation coin
+			coin.animationCoin();
 
-		window.clear();
+			window.clear();
 
 #pragma region Order to draw the sprite
 
-		/* You have to be careful when putting the sprites, since they overlap, I think the correct order would be:
-		   background-> platforms -> player -> enemy -> coin */
+			/* You have to be careful when putting the sprites, since they overlap, I think the correct order would be:
+			   background-> platforms -> player -> enemy -> coin */
 
 #pragma endregion
 
-		background.drawBackground(window);
+			background.drawBackground(window);
 
-		score.showScore(window, player);
+			coin.drawCoin(window);
 
-		coin.drawCoin(window);
+			enemyBat.drawBat(window);
 
-		player.drawPlayer(window);
+			player.drawPlayer(window);
 
-		coin.animationCoin();
+			score.showScore(window, player);
 
-		player.updatePlayer();
+			coin.animationCoin();
 
-		coin.getValuesCoin();
+			player.getPlayer();
 
-		if (player.Collision(coin)) {
+			coin.getValuesCoin();
 
-			coin.changePosition(window);
-		}
+			enemyBat.getBat();
 
-		window.display();
-		if (window.hasFocus()) {
-			//cout << "Playing..." << endl;
-		}
-		else {
-			//cout << "Not Playing..." << endl;
+
+			if (player.CollisionCoin(coin)) {
+
+				coin.changePosition(window);
+			}
+
+			if (player.CollisionBat(enemyBat)) {
+				player.changePositionAfterCollisionWithEnemy(window);
+			}
+
+			window.display();
+			if (window.hasFocus()) {
+				//cout << "Playing..." << endl;
+			}
+			else {
+				//cout << "Not Playing..." << endl;
+			}
 		}
 	}
-	return 0;
+		return 0;
 }

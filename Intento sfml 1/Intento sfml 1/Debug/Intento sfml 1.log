@@ -9,18 +9,35 @@ e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\coin.h(62): warning
           [
               T=int
           ]
-e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\player.h(123): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\player.h(31): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\player.h(86): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\player.h(87): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\enemybat.h(24): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\enemybat.h(26): warning C4305: '=': truncamiento de 'double' a 'float'
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\enemybat.h(44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\enemybat.h(45): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\enemybat.h(46): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\enemybat.h(47): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\enemybat.h(68): warning C4305: '=': truncamiento de 'double' a 'float'
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\player.h(140): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\player.h(32): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\player.h(34): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+          with
+          [
+              T=unsigned int
+          ]
 e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\player.h(88): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\player.h(89): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\player.h(90): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\player.h(91): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\player.h(129): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+          with
+          [
+              T=unsigned int
+          ]
 e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\score.h(20): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=unsigned int
           ]
-e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\intento sfml 1.cpp(25): warning C4244: 'argumento': conversión de 'T' a 'unsigned int'; posible pérdida de datos
+e:\mi_github\testeaaplicaccion\intento sfml 1\intento sfml 1\intento sfml 1.cpp(26): warning C4244: 'argumento': conversión de 'T' a 'unsigned int'; posible pérdida de datos
           with
           [
               T=float
